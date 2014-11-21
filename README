@@ -1,0 +1,234 @@
+*******************************************************************************
+P A S S I V E    N E T W O R K    A U D I T    F R A M E W O R K    (PNAF) V0.1
+*******************************************************************************
+
+Copyright (C) 2014 Javier Santillan
+
+PNAF v0.1 public prototype is an implementation of a TU/e master thesis
+developed as internship project at Fox-IT B.V in The Netherlands. This public
+prototype DOES NOT include any internal information about TU/e nor Fox-IT.
+
+
+###############################################################################
+1. SUMMARY
+###############################################################################
+
+PNAF is a framework intended to provide the capability of getting a security 
+assessment of network plattforms by analysing in-depth the network traffic
+(in a passive way) and by providing a high-level interpretation in an 
+automated way. It combines different analysis techniques and tools.
+The framework is intended to achieve the following goals:
+
+    Architecture:
+    a. To be a flexible, scalable and modular framework
+    b. To provide accurate analysis of network plattforms
+    c. To provide a useful API in order to develop further features and
+       improvements
+
+    Functional:
+    a. Summary of the Security Level of the network
+    b. Findings of anomalous activities
+    c. Findings of security audit policy
+    d. Findings of impact analysis (e.g. based on CVE)
+    e. Summary of security recommendations
+    f. Reference of evidence
+
+
+###############################################################################
+2. ARCHITECTURE
+###############################################################################
+
+PNAF is comprised by four main modules. Each module has its own engines which
+manage specific tools and process the data.
+
+-----------------------------------------------
+PNAF Core
+-----------------------------------------------
+    > FECE	- Framework Environment Configuration Engine
+    > FAPI	- Framework Application Programming Interface
+    > FDCM	- Framework Daemon Control Manager
+    > FSA	- Framework Security Auditor 
+
+
+-----------------------------------------------
+1.  DCM - DATA COLLECTION MODULE
+------------------------------------------------
+    > NTCE	- Network Traffic Capture Engine
+    > NCPE	- Network Traffic Pre-processing Engine
+
+-----------------------------------------------
+2.  DPM - DATA PROCESSING MODULE
+-----------------------------------------------
+    > NPEE 	- Network Profiling and Enumeraton Engine
+	* p0f	: Network and service enumeration 
+	* prads	: Network and service enumeration
+
+    > IDSE	- Network Intrusion Detection Engine
+	* Suricata
+	* Snort
+	* Bro
+	* Barnyard : Unified2 reader
+
+    > NFAE	- Network Flow Analysis Engine
+	* Cxtracker  : Basic flow data summary
+	* Argus      : Flow data analysis
+	* Yaf        : Flow data analysys
+	* Silk       : Flow data analysys
+	* Tcpdstat   : Protocol statistics
+
+    > DPIE	- Deep Packet Inspection Engine
+	* Chaoreader : Application data extraction "any-snarf"
+	* Nftracker  : File extraction
+	* Xplico     : Application data extraction (url, files, ...)
+	* Httpry     : HTTP data logger
+	* Ssldump    : SSLv3/TLS data tracker
+	* Dnsdump    : DNS data extraction
+	* Passivedns : Passive DNS data collection
+	* Dnscap     : DNS capture utility (tcpdump-like for DNS)
+	* Tcpxtract  : File extraction
+	* Tcpdump    : Pcap filtering
+
+    > NSAE	- Network Security Audit Engine
+
+-----------------------------------------------
+3.  DVM - DATA VISUALIZATION MODULE (TODO -- Dev)
+-----------------------------------------------
+    > WDVE	- Web Data Visualization Engine
+    > GSVE	- Graphic Security Visualization Engine
+    > SARE	- Security Audit Report Engine
+    > DIEE	- Data Import/Export Engine
+
+
+###############################################################################
+3. REQUIREMENTS
+###############################################################################
+
+The current version has been tested on GNU/Linux Debian (6.x or later) and
+Gentoo (Stage 3) distributions.
+The main installer prepares automatically the whole environment by compiling
+all the tools included within the framework as well as their dependencies.
+
+Since the installer downloads some packages using either apt or emerge
+depending on the distribution, then the installer needs to have access to 
+Internet. Otherwise you can use the option '--no-packages' and then install
+by yourself the following packages/libraries:
+
+APT packages:
+-------------
+
+    autoconf automake binutils-dev bison \                                                
+    build-essential byacc ccache cmake dsniff flex g++ gawk gcc \       
+    libcap-ng-dev libcli-dev libdatetime-perl libdumbnet-dev \          
+    libfixposix0 libfixposix-dev libgeoip-dev zlib1g zlib1g-dev \       
+    libgetopt-long-descriptive-perl libglib2.0-cil-dev \                
+    libjansson4 libjansson-dev libldns-dev liblzo2-2 libnet1-dev \      
+    libmagic-dev libmysql++3 libmysqlclient-dev libmysql++-dev \        
+    libnacl-dev libncurses5-dev libldns1 libnetfilter-conntrack-dev \   
+    libnetfilter-queue1 libnetfilter-queue-dev libnet-pcap-perl \       
+    libnfnetlink0 libnfnetlink-dev libnl-3-dev libnl-genl-3-dev \       
+    libpcap-dev libpcre3 libpcre3-dbg libpcre3-dev libsqlite3-dev \     
+    libssl-dev liburcu-dev libyaml-0-2 libyaml-dev liblzo2-dev \        
+    openssl pkg-config python-dev python-docutils sqlite3 swig \        
+    git-core libglib2.0-dev libtool tcpslice tcpick tshark \            
+    tcpflow ethtool"  
+
+Emerge sources
+--------------
+autoconf automake binutils bison libtool byacc ccache cmake flex gawk gcc
+dev-util/cmake sys-libs/libcap-ng dev-perl/glib-perl dev-libs/jansson
+dev-libs/lzo net-libs/libnet dev-libs/libnl virtual/perl-libnet dev-libs/geoip
+net-libs/libnetfilter_queue net-libs/libnetfilter_conntrack perl-core/libnet 
+dev-perl/Net-PcapUtils dev-perl/Net-Pcap net-libs/libnfnetlink dev-db/sqlite 
+dev-libs/libyaml dev-lang/swig net-analyzer/tcpflow dev-libs/libcli 
+net-analyzer/dsniff dev-perl/DateTime ethtool
+
+Additionally you need to install the following Perl Modules
+
+Config::Auto
+Pod::Usage 
+Proc::Daemon
+IO::CaptureOutput
+JSON:XS
+Cwd
+JSON::Parse
+Time::Piece
+Exception::Class
+Test::Warn
+Test::Differences
+Test::Deep
+Test::Most
+HTTP::BrowserDetect
+Getopt::Long
+String::Tokenizer
+URI::Encode
+Devel::Hexdump
+Digest::MD5
+Data::Dumper
+YAML
+NetPacket::Ethernet
+Net::Subnet
+
+###############################################################################
+4. INSTALLATION
+###############################################################################
+
+You can install the whole framework (i.e. including the tools) by using the 
+installer script. It has been tested on both Debian 7.x / Gentoo Stage 3
+based systems (clean installation, base system, chrooted)
+
+ # ./install.sh
+
+Alternatively you can install the Core Framework (without tools) by using
+the Makefile. In such a case you need to specify a bunch of option within
+the PNAF configuration file (binary files, configuration files, log dirs,..)
+For more information check out the 'build/pnaf/etc/pnaf.conf' file.
+
+To install this module type the following:
+
+    cd build/pnaf/Pnaf
+    perl Makefile.PL
+    make
+    make test
+    make install 	// (as root)
+
+
+###############################################################################
+5. COPYRIGHT AND LICENSE
+###############################################################################
+
+Copyright (C) 2014 by Javier Santillan
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Also add information on how to contact you by electronic and paper mail.
+
+PNAF v0.1  Copyright (C) 2014 Javier Santillan
+This program comes with ABSOLUTELY NO WARRANTY; for details type `show w'.
+This is free software, and you are welcome to redistribute it
+under certain conditions; type `show c' for details.
+
+###############################################################################
+6. TODO
+###############################################################################
+
+- Provide a complete plattform-independent installation.
+
+
+##############################################################################
+7. CONTACT
+##############################################################################
+
+Javier Santillan <jusafing@gmail.com> 2014
+
+
+

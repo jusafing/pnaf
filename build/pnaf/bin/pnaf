@@ -1,0 +1,108 @@
+#!/usr/bin/perl -w
+##############################################################################
+# PASSIVE NETWORK AUDIT FRAMEWORK
+# Version 0.1.0
+# By Javier Santillan [2014]
+# ----------------------------------------------------------------------------
+# 
+# File		: PNAF agent
+# Description 	: Main PNAF executer. It manages the framework's execution.
+#
+##############################################################################
+use strict;
+use warnings;
+use Getopt::Long;
+use Config::Auto;
+use Pod::Usage;
+use YAML;
+use POSIX;
+use Proc::Daemon;
+use Pnaf::Core;
+use Pnaf::Dcm;
+use Pnaf::Dpm;
+use Pnaf::Dvm;
+
+
+
+##############################################################################
+# Initial banner
+my $this_function = "main";
+printBanner();
+
+##############################################################################
+# Loading configuration parameters from config file and ARGV
+loadConfig($this_function,"daemon");
+
+##############################################################################
+# Show sumary of configuration parameters
+if ( $CFG::options{debug} =~ m/(yes)|1/ )
+{
+    showVersions($this_function, "debug");
+    showCfg($this_function, "debug");
+}
+
+##############################################################################
+# Validate options and show sumary
+validateOptions($this_function);
+showCfg($this_function, "summary"); 
+
+##############################################################################
+
+
+#startDaemon($this_function) if $CFG::options{daemon} =~ m/(yes)|1/ ;
+#addFixsizeCapture($this_function,"1000");
+startDaemon($this_function) if ( checkDaemon($this_function,"daemon") == 0 );
+
+#listenFifo($this_function, "capture");
+
+__END__
+
+=head1 PNAF v0.1.0
+
+    Passive Network Audit Framework
+
+=head1 SYNOPSIS
+
+    ./pnaf [options]
+
+     Options:
+	--help          Brief help message
+	--debug        	Enable Debug execution
+	--verbose	Enable verbosity during execution
+
+=head1 OPTIONS
+
+=over 8
+
+=item B<-help>
+    Print a brief help message and exits.
+
+=back
+
+=head1 DESCRIPTION
+    B<PNAF> is a framework intended to provide the capability of getting
+    a security assessment of network plattforms (small, medium and large)
+    by analysing in-depth the network traffic (in a passive way) and by
+    providing a high-level interpretation in an automated way. It combines
+    differet analysis techniques, algorithms and technologies. To this
+    extent, the framework is intended to achieve the following goals:
+    Architecture:
+	a. To be a flexible, scalable and modular framework
+	b. To provide accurate analysis of network plattforms
+	c. To provide a useful API in order to develop further features
+	   and improvements
+    Functional:
+	a. Summary of the Security Level of the network
+	b. Findings of anomalous activities
+	c. Findings of security audit policy
+	d. Findings of impact analysis
+	e. Summary of security recommendations
+	f. Reference of evidence
+
+=head1 AUTHOR
+
+    Javier Santillan
+    jusafing@gmail.com
+
+
+=cut

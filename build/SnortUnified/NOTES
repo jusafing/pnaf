@@ -1,0 +1,18 @@
+SnortUnified
+
+  exec_handler("unified_opened", $UF);
+  exec_handler("unified2_event", $UF_Record);
+  exec_handler("unified2_packet", $UF_Record);
+  exec_handler("unified2_unhandled", $UF_Record);
+  exec_handler("unified2_record", $UF_Record); 
+  exec_handler("unified_record", $UF_Record);
+  exec_handler("read_data", @($readsize, $buffer));
+  exec_handler("read_header", $h));
+
+Database
+
+  exec_handler('pre_event_insert', $record);
+  exec_handler('post_event_insert', $record);
+  exec_handler('pre_log_insert', $record);
+  exec_handler('post_log_insert', $record);
+

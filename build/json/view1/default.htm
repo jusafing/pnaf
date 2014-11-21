@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+	<title>JSON Visualization</title>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<meta name="robots" content="index,follow" />
+
+	<meta name="description"
+		content="Simple, easy method to visually inspect a JSON-encoded string." />
+
+	<meta name="keywords"
+		content="json,visualize,pretty print,developer tool" />
+
+	<link rel="canonical"
+		href="http://chris.photobooks.com/json/default.htm" />
+
+	<link rel="stylesheet" type="text/css"
+		href="glibrary/yui_2.8.0r4/build/reset-fonts/reset-fonts.css" />
+
+	<link rel="stylesheet" type="text/css"
+		href="glibrary/yui_2.8.0r4/build/base/base.css" />
+
+	<link rel="stylesheet" type="text/css" href="default.css" />
+
+	<script type="text/javascript"
+		src="glibrary/yui_2.8.0r4/build/yuiloader-dom-event/yuiloader-dom-event.js"></script>
+
+	<script type="text/javascript"
+		src="glibrary/yui_2.8.0r4/build/json/json-min.js"></script>
+
+	<script type="text/javascript" src="default-min.js"></script>
+
+</head>
+<body onload='clickRender()'>
+
+	<h1>JSON_TITLE</h1>
+	<h1>JSON_SUBTITLE</h1>
+
+	<menu style="
+		margin: 0px 0px 1em 0px;
+		padding: 0px;
+		float: left;
+		width: 12em;">
+
+		<h3 style="margin-top: 0px;">Input</h3>
+
+		<p>
+			<label>
+				<input type="radio" name="jsonParser"
+					id="jsonStrict" value="1" checked="checked" /> Strict JSON
+			</label><br />
+
+			<label>
+				<input type="radio" name="jsonParser"
+					id="jsonEval" value="0" /> Eval
+			</label>
+		</p>
+
+		<h3>Output</h3>
+
+		<p id="jsonOutputSet">
+			<label>
+				<input type="radio" name="jsonOutStyle"
+					id="json2HTML" value="1" checked="checked" /> HTML
+			</label><br />
+
+			<label>
+				<input type="radio" name="jsonOutStyle"
+					id="json2JSON" value="0" /> JSON
+			</label>
+
+		</p>
+
+		<h3>Options:</h3>
+
+		<p id="jsonOptionSet" class="HTML">
+
+			<label id="jsonTrunc_label">
+				<input type="checkbox" id="jsonTrunc"
+					value="1" checked="checked" /> Truncate long strings
+			</label><br />
+
+			<label id="jsonDate_label">
+				<input type="checkbox" id="jsonDate"
+					value="1" checked="checked" /> Detect encoded dates
+			</label><br />
+
+			<label id="jsonData_label">
+				<input type="checkbox" id="jsonData"
+					value="1" checked="checked" /> Detect data structures
+			</label><br />
+
+			<label id="jsonSpace_label">
+				<input type="checkbox" id="jsonSpace" value="1" />
+				Preserve whitespace
+			</label>
+		</p>
+
+		<h3>Actions:</h3>
+
+		<p>
+			<button id="cmdRender">Render</button><br />
+			<button id="cmdCollapse">Collapse</button><br />
+			<button id="cmdExpand">Expand</button><br />
+		</p>
+
+		<code id="jsonLocation"></code>
+
+	</menu>
+
+	<div style="padding-left: 13em;">
+		<h2 style="margin-top: 0px; font-size: 108%;">
+			<label for="jsonInput">Input:</label>
+			<small id="jsonSize"></small>
+		</h2>
+		<textarea id="jsonInput"
+			rows="5" cols="50"
+			placeholder="Loading data. Please wait ..."
+			spellcheck="false"
+			autofocus="autofocus">
+			JSON_DATA
+			</textarea>
+
+		<h2 style="font-size: 108%;">Expand the tree here:</h2>
+		<output
+			style="display: block;"
+			for="jsonInput cmdValidate"
+			id="jsonValidateOutput"></output>
+		<output
+			style="display: block;"
+			for="jsonInput jsonStrict jsonEval json2HTML json2JSON jsonTrunc jsonDate jsonData jsonSpace"
+			id="jsonOutput"></output>
+	</div>
+
+
+	<script type="text/javascript">
+		if (
+			window.location.hostname.substring(0, 6).toLowerCase() !== 'local.'
+		) {
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-5037510-1']);
+			_gaq.push(['_trackPageview']);
+			_gaq.push(['_trackPageLoadTime']);
+
+			(function () {
+				var s, ga = document.createElement('script');
+				ga.type = 'text/javascript';
+				ga.async = true;
+				ga.src =
+					((document.location.protocol === 'https:') ?
+						'https://ssl' : 'http://www') +
+						'.google-analytics.com/ga.js';
+				s = document.getElementsByTagName('script')[0];
+				s.parentNode.insertBefore(ga, s);
+			}());
+		}
+		function clickRender()
+		  {
+		    document.getElementById('cmdRender').click()
+		    document.getElementById('cmdCollapse').click()
+		      }
+	</script>
+</body>
+</html>

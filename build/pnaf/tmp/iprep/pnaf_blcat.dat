@@ -1,0 +1,33 @@
+1,CnC,Malware Command and Control Server
+2,Bot,Known Infected Bot
+3,Spam,Known Spam Source
+4,Drop,Drop site for logs or stolen credentials
+5,SpywareCnC,Spyware Reporting Server
+6,OnlineGaming,Questionable Gaming Site
+7,DriveBySrc,Driveby Source
+9,ChatServer,POLICY Chat Server
+10,TorNode,POLICY Tor Node
+13,Compromised,Known compromised or Hostile
+15,P2P,P2P Node
+16,Proxy,Proxy Host
+17,IPCheck,IP Check Services
+19,Utility,Known Good Public Utility
+20,DDoSTarget,Target of a DDoS
+21,Scanner,Host Performing Scanning
+23,Brute_Forcer,SSH or other brute forcer
+24,FakeAV,Fake AV and AS Products
+25,DynDNS,Domain or IP Related to a Dynamic DNS Entry or Request
+26,Undesirable,Undesirable but not illegal
+27,AbusedTLD,Abused or free TLD Related
+28,SelfSignedSSL,Self Signed SSL or other suspicious encryption
+29,Blackhole,Blackhole or Sinkhole systems
+30,RemoteAccessService,GoToMyPC and similar remote access services
+31,P2PCnC,Distributed CnC Nodes
+33,Parking,Domain or SEO Parked
+34,VPN,VPN Server
+35,EXE_Source,Suspicious exe or dropper service
+37,Mobile_CnC,Known CnC for Mobile specific Family
+38,Mobile_Spyware_CnC,Spyware CnC specific to mobile devices
+39,Skype_SuperNode,Observed Skype Bootstrap or Supernode
+40,Bitcoin_Related,Bitcoin Mining and related
+41,DDoSAttacker,DDoS Source

@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="jsoneditor/jsoneditor.min.css">
+    <script type="text/javascript" src="jsoneditor/jsoneditor.min.js"></script>
+    <h2>PNAF_TITLE</h2>
+</head>
+<body onload="setJSON();">
+
+<div id="argusFlow"   style="position:absolute; top:35px;              width:500px; height: 400px;"><h2>ARGUSFLOW_TITLE</h2></div>
+<div id="tcpdstat"    style="position:absolute; top:35px; left:550px ; width:500px; height: 400px;"><h2>TCPDSTAT_TITLE</h2></div>
+<div id="p0f"         style="position:absolute; top:35px; left:1100px; width:500px; height: 400px;"><h2>P0F_TITLE</h2></div>
+<div id="prads"       style="position:absolute; top:35px; left:1650px; width:500px; height: 400px;"><h2>PRADS_TITLE</h2></div>
+<div id="snortAppId"  style="position:absolute; top:35px; left:2200px; width:500px; height: 400px;"><h2>SNORTAPPID_TITLE</h2></div>
+
+<div id="httpry"      style="position:absolute; top:500px;              width:500px; height: 400px;"><h2>HTTPRY_TITLE</h2></div>
+<div id="snortIds"    style="position:absolute; top:500px; left:550px;  width:500px; height: 400px;"><h2>SNORTIDS_TITLE</h2></div>
+<div id="suricataEve" style="position:absolute; top:500px; left:1100px; width:500px; height: 400px;"><h2>SURICATAEVE_TITLE</h2></div>
+<div id="bro"         style="position:absolute; top:500px; left:1650px; width:500px; height: 400px;"><h2>BRO_TITLE</h2></div>
+
+<script type="text/javascript" >
+    // create the editor
+    var container_argusFlow  = document.getElementById("argusFlow");
+    var editor_argusFlow     = new JSONEditor(container_argusFlow);
+    var container_p0f        = document.getElementById("p0f");
+    var editor_p0f           = new JSONEditor(container_p0f);
+    var container_prads      = document.getElementById("prads");
+    var editor_prads         = new JSONEditor(container_prads);
+    var container_snortAppId = document.getElementById("snortAppId");
+    var editor_snortAppId    = new JSONEditor(container_snortAppId);
+    var container_bro        = document.getElementById("bro");
+    var editor_bro           = new JSONEditor(container_bro);
+    var container_httpry     = document.getElementById("httpry");
+    var editor_httpry        = new JSONEditor(container_httpry);
+    var container_tcpdstat   = document.getElementById("tcpdstat");
+    var editor_tcpdstat      = new JSONEditor(container_tcpdstat);
+    var container_suricataEve= document.getElementById("suricataEve");
+    var editor_suricataEve   = new JSONEditor(container_suricataEve);
+    var container_snortIds   = document.getElementById("snortIds");
+    var editor_snortIds      = new JSONEditor(container_snortIds);
+
+    function setJSON () {
+        var json_argusFlow  = JSON_ARGUSFLOW;
+        editor_argusFlow.set(json_argusFlow);
+        var json_p0f        = JSON_P0F;
+        editor_p0f.set(json_p0f);
+        var json_prads      = JSON_PRADS;
+        editor_prads.set(json_prads);
+        var json_snortAppId = JSON_SNORTAPPID;
+        editor_snortAppId.set(json_snortAppId);
+        var json_bro       = JSON_BRO;
+        editor_bro.set(json_bro);
+        var json_httpry = JSON_HTTPRY;
+        editor_httpry.set(json_httpry);
+        var json_tcpdstat = JSON_TCPDSTAT;
+        editor_tcpdstat.set(json_tcpdstat);
+        var json_suricataEve = JSON_SURICATAEVE;
+        editor_suricataEve.set(json_suricataEve);
+        var json_snortIds = JSON_SNORTIDS;
+        editor_snortIds.set(json_snortIds);
+    }
+</script>
+
+</body>
+</html>

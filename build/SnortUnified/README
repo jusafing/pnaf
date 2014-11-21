@@ -1,0 +1,7 @@
+One day I needed to do something with a set of unified files and did not have access to a compiler ( long story ) so I made this. I released it after making a few more changes to guage interest. There appears to be active interest in perl unified handling so here it is.
+
+This codebase is very much a work in progress. I am aware of several uses of this code in production environments and am actively looking for feedback, bug reports, patches, and feature requests. If you find it useful, please let me know. If you hate it please let me know and tell me why.
+
+thx
+jason
+

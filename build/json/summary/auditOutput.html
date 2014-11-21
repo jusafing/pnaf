@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="jsoneditor/jsoneditor.min.css">
+    <script type="text/javascript" src="jsoneditor/jsoneditor.min.js"></script>
+    <h2>PNAF AUDIT SUMMARY</h2>
+</head>
+<body onload="setJSON();">
+
+<div id="auditdic" style="position:absolute; top:35px;               width:500px; height: 500px;"><h2>DICTIONARY NVD NIST (CVE-MITRE)</h2></div>
+<div id="auditbli" style="position:absolute; top:35px;  left:550px;  width:500px; height: 500px;"><h2>BLACKLIST IP REPUTATION</h2></div>
+<div id="auditbld" style="position:absolute; top:35px;  left:1100px; width:500px; height: 500px;"><h2>BLACKLIST DOMAIN REPUTATION</h2></div>
+
+<script type="text/javascript" >
+    // create the editor
+    var container_auditdic  = document.getElementById("auditdic");
+    var editor_auditdic     = new JSONEditor(container_auditdic);
+    var container_auditbli  = document.getElementById("auditbli");
+    var editor_auditbli     = new JSONEditor(container_auditbli);
+    var container_auditbld  = document.getElementById("auditbld");
+    var editor_auditbld     = new JSONEditor(container_auditbld);
+
+    function setJSON () {
+        var json_auditdic = JSON_DIC;
+        editor_auditdic.set(json_auditdic);
+        var json_auditbld = JSON_BLD;
+        editor_auditbld.set(json_auditbld);
+        var json_auditbli = JSON_BLI;
+        editor_auditbli.set(json_auditbli);
+    }
+</script>
+
+</body>
+</html>

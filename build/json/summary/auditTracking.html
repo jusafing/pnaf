@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="jsoneditor/jsoneditor.min.css">
+    <script type="text/javascript" src="jsoneditor/jsoneditor.min.js"></script>
+    <h2>PNAF AUDIT DATA STRUCTURE</h2>
+</head>
+<body onload="setJSON();">
+
+<div id="auditt" style="position:absolute; top:35px;   width:800px; height: 900px;"><h2>AUDIT TRACKING</h2></div>
+
+<script type="text/javascript" >
+    // create the editor
+    var container_auditt  = document.getElementById("auditt");
+    var editor_auditt     = new JSONEditor(container_auditt);
+
+    function setJSON () {
+        var json_auditt = JSON_T;
+        editor_auditt.set(json_auditt);
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="jsoneditor/jsoneditor.min.css">
+    <script type="text/javascript" src="jsoneditor/jsoneditor.min.js"></script>
+    <h2>NVD (CVE MITRE) NIST DATABASE</h2>
+</head>
+<body onload="setJSON();">
+
+<div id="audits" style="position:absolute; top:35px;             width:1200px; height: 1000px;"><h2>CVE Database</h2></div>
+
+<script type="text/javascript" >
+    // create the editor
+    var container_audits  = document.getElementById("audits");
+    var editor_audits     = new JSONEditor(container_audits);
+
+    function setJSON () {
+        var json_audits = 
+

@@ -1,0 +1,223 @@
+#!/usr/bin/perl -w
+##############################################################################
+# PASSIVE NETWORK AUDIT FRAMEWORK
+# Version 0.1.0
+# By Javier Santillan [2014]
+# ----------------------------------------------------------------------------
+# 
+# File		: PNAF agent
+# Description 	: Main PNAF executer. It manages the framework's execution.
+#
+##############################################################################
+use strict;
+use warnings;
+use Getopt::Long;
+use Config::Auto;
+use Pod::Usage;
+use YAML;
+use POSIX;
+use Proc::Daemon;
+use Pnaf::Core;
+use Pnaf::Dcm;
+use Pnaf::Dpm;
+use Pnaf::Dvm;
+##############################################################################
+##############################################################################
+
+
+##############################################################################
+# Initial banner
+my $self = "main";
+printBanner();
+
+
+##############################################################################
+local $SIG{__WARN__} = sub {
+    my $message = shift;
+    chomp($message);
+    if ($message =~ m/(Pnaf\/.*.pm)/ )
+    {
+	logMsgT($self,$message, 1, "$CFG::options{log_file}");
+    }
+    else
+    {
+	logMsgT($self,"External Warning: $message", 1,
+		"$CFG::options{log_file}.ext_warnings", 0);
+    }
+};
+
+
+##############################################################################
+# Loading configuration parameters from config file and ARGV
+loadConfig($self, "auditor");
+
+##############################################################################
+# Show sumary of configuration parameters
+if ( $CFG::options{debug} =~ m/(yes)|1/ )
+{
+    showVersions($self, "debug");
+    showCfg($self, "debug");
+}
+
+##############################################################################
+# Validate options and show sumary
+validateOptions($self);
+showCfg($self, "summary"); 
+
+##############################################################################
+# Loading PNAF instance
+my @parsers;
+my $instance_name;
+my $instance_json;
+my $instance_logdir ;
+if ( $CFG::options{parser} )
+{
+    @parsers = split(/,/,$CFG::options{parser});
+}
+else # default parsers
+{
+    push @parsers, 'argusFlow'; 
+    push @parsers, 'p0f'; 
+    push @parsers, 'prads'; 
+    push @parsers, 'snortAppId'; 
+    push @parsers, 'suricataHttp'; 
+    push @parsers, 'httpry'; 
+    push @parsers, 'tcpdstat'; 
+    push @parsers, 'suricataEve'; 
+    push @parsers, 'snortIds'; 
+    push @parsers, 'bro'; 
+}
+if ( $CFG::options{cap_file} )
+{
+    logMsgT($self,"Processing PCAP file ( $CFG::options{cap_file})",
+	    2, $CFG::options{log_file});  
+    $instance_name   = loadPnafInstance($self,	$CFG::options{cap_file},
+						$CFG::options{log_dir});
+    if ( $CFG::args{log_dir} )
+    {
+	$instance_json   = "$CFG::options{log_dir}/json";
+	$instance_logdir = $CFG::options{log_dir};
+    }
+    else
+    {
+	$instance_json   = "$CFG::options{dvm_web_dir}/$instance_name/json";
+	$instance_logdir = "$CFG::options{log_dir}/$instance_name";
+    }
+    processDataset( $self, $instance_logdir, \@parsers, $instance_json);
+}
+elsif ( $CFG::options{instance_dir} )
+{
+    logMsgT($self,"Processing Instance data from ($CFG::options{instance_dir})",
+	    2, $CFG::options{log_file});  
+    if ( $CFG::options{log_dir} )
+    {
+	$instance_json = $CFG::options{log_dir};
+	processDataset( $self	  , $CFG::options{instance_dir},
+		        \@parsers , $instance_json);
+    }
+    else
+    {
+	$CFG::options{instance_dir} =~ m/[\/*.*]*([^\/]+\/*$)/;
+	if ($1)
+	{
+	    $instance_name = $1;
+	    $instance_json = "$CFG::options{dvm_web_dir}/$instance_name/json";
+	    processDataset( $self	, $CFG::options{instance_dir},
+			    \@parsers	, $instance_json);
+	}
+	else
+	{
+	    logMsgT($self,"Invalid instance directory ($1)",
+		    0, $CFG::options{log_file});  
+	}
+    }
+}
+else
+{
+    logMsgT($self,"No input data was received. Please specify either a PCAP ".
+	    "file or an INSTANCE data directory", 1, $CFG::options{log_file});
+    logMsgT($self,"See '--help' option and tell me what to do.",
+	    1, $CFG::options{log_file});  
+}
+
+
+__END__
+
+=head1 PNAF v0.1.2
+
+    Passive Network Audit Framework
+
+=head1 SYNOPSIS
+
+    $ pnaf_auditor [options]
+
+     Options:
+
+	Execution:
+	--debug   		: Enable debug mode
+	--conf			: Specify configuration file (yaml)
+	--help			: Show this
+	--version		: Show tools versions
+	--parser arg1[,arg2]	: Specify parsers be loaded
+	    'p0f'		: Process enumeration data
+	    'prads'		: Process enumeration data
+	    'argusFlow'		: Process NFA data (flow analysis)
+	    'snortAppId'	: Process enumeration data (App identification)
+	    'httpry'		: DPI over HTTP (URL's, UA, etc)
+	    'tcpdstat'		: Process enumeration data (protocol dist)
+	    'suricataEve'	: Process IDS data (alerts and payloads)
+	    'bro'		: DPI over different protocols
+	    'tcpflow'		: Process NFA data (session tracking)
+	--out_dataset		: Specify the kind of output data to generate
+	    'all'		: Generate all datasets
+	    'audit'		: Generate only audit dataset
+	--home_net		: Specify the 'homenet' in CIDR format
+	--payload		: Flag to enable payload decoding (IDS data)
+
+	Inputs:
+	--cap_file		: Set input capture file (pcap)
+	--audit_dict		: Path to vulnerability dictionary
+	--instance_dir		: Path to directory with 'initial raw dataset'
+
+	Logging:
+	--log_dir  		: Path to log directory
+	--log_file 		: Path to output directory
+
+
+=head1 OPTIONS
+
+=over 8
+
+=item B<-help>
+    Print a brief help message and exits.
+
+=back
+
+=head1 DESCRIPTION
+    B<PNAF> is a framework intended to provide the capability of getting
+    a security assessment of network plattforms (small, medium and large)
+    by analysing in-depth the network traffic (in a passive way) and by
+    providing a high-level interpretation in an automated way. It combines
+    differet analysis techniques, algorithms and technologies. To this
+    extent, the framework is intended to achieve the following goals:
+    Architecture:
+	a. To be a flexible, scalable and modular framework
+	b. To provide accurate analysis of network plattforms
+	c. To provide a useful API in order to develop further features
+	   and improvements
+    Functional:
+	a. Summary of the Security Level of the network
+	b. Findings of anomalous activities
+	c. Findings of security audit policy
+	d. Findings of impact analysis
+	e. Summary of security recommendations
+	f. Reference of evidence
+
+=head1 AUTHOR
+
+    Javier Santillan
+    jusafing@gmail.com
+
+
+=cut
+
