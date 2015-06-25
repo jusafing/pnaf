@@ -5,12 +5,12 @@
 ## By Javier Santillan [jusafing@gmail.com] (2014)                          ##
 ## -------------------------------------------------------------------------##
 ## Requirements:                                                            ##
-##	- Debian GNU/Linux 7.0.x					    ##
-##	- Gentoo GNU/Linux stage3-x                                         ##
+##	- Debian GNU/Linux 7.0.x                                                ##
+##	- Gentoo GNU/Linux stage3-x                                             ##
 ## Summary :                                                                ##
-## 	Installation script of Passive Network Audit Framework v0.1         ##
-##	It compiles and installs a set of traffic analysis tools.           ##
-## 	See README file for more info.                                      ##
+## 	Installation script of Passive Network Audit Framework v0.1             ##
+##	It compiles and installs a set of traffic analysis tools.               ##
+## 	See README file for more info.                                          ##
 ##############################################################################
 
 ##############################################################################
@@ -202,16 +202,16 @@ selectTools()
         --checklist     "Please select the operating system of this sensor"\
 		                 20 61 15 \
 	    "Prads"         "1-  Profiling and enumeration tool" on \
-	    "P0f"	    "2-  Profiling and enumeration tool" on \
+	    "P0f"           "2-  Profiling and enumeration tool" on \
 	    "Tcpdstat"	    "3-  Protocol Distribution" on \
 	    "Suricata"	    "4-  Intrusion Detection system" on \
-	    "Snort"	    "5-  Intrusion Detection system" on \
-	    "Bro"	    "6-  Intrusion Detection Framework" on \
+	    "Snort"	        "5-  Intrusion Detection system" on \
+	    "Bro"	        "6-  Intrusion Detection Framework" on \
 	    "Barnyard"	    "7-  Unified2 data logger" off \
 	    "Cxtracker"	    "8-  Session Tracker" on \
-	    "Argus"	    "9-  Network flow analyzer" on \
-	    "Yaf"	    "10- Network Flow analyzer" off \
-	    "Silk" 	    "11- Network Flow Analyzer" off \
+	    "Argus"	        "9-  Network flow analyzer" on \
+	    "Yaf"	        "10- Network Flow analyzer" off \
+	    "Silk" 	        "11- Network Flow Analyzer" off \
 	    "Tcpflow"	    "12- Network Flow Analyzer" on \
 	    "Chaosreader"   "13- Application data analyzer" on \
 	    "Xplico" 	    "14- Application data analyzer" off \
@@ -714,12 +714,14 @@ installSsldump()
         # * Applying ssldump-0.9-DLT_LINUX_SLL.patch ...
         # * Applying ssldump-0.9-prefix-fix.patch ... 
         cleanDir "$package"
-	execCmd "$FUNCNAME" "tar -zxvf $package-gentoo_patched.tar.gz"
-	execCmd "$FUNCNAME" "cd $package"
+	    execCmd "$FUNCNAME" "tar -zxvf $package-gentoo_patched.tar.gz"
+	    execCmd "$FUNCNAME" "cd $package"
         execCmd "$FUNCNAME" "./configure --prefix=$outdir\
 		--with-pcap=/usr/local/pcap/ --build=x86_64-pc-linux-gnu\
 		--host=x86_64-pc-linux-gnu"
     fi
+    local ins=`whereis install| grep -o ' install '`
+    execCmd "$FUNCNAME" "sed -i -r 's/INSTALL=.*-c/INSTALL=$ins -c/' Makefile"
     execCmd "$FUNCNAME" "make"
     execCmd "$FUNCNAME" "make install"
 }
@@ -805,7 +807,8 @@ installSnort()
     execCmd "$FUNCNAME" "tar -zxvf $package.tar.gz"
     execCmd "$FUNCNAME" "cd $package"
     if [ "$OPT_OS" == "debian" ]; then                                
-	    execCmd "$FUNCNAME" "./configure"
+	    #execCmd "$FUNCNAME" "./configure"
+	    execCmd "$FUNCNAME" "./configure \"CFLAGS=-fPIC -g -O2\" "
     elif [ "$OPT_OS" == "gentoo" ]; then                              
 	    execCmd "$FUNCNAME" "./configure \"CFLAGS=-fPIC -g -O2\" "
     fi

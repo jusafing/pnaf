@@ -151,38 +151,119 @@ __END__
 
     $ pnaf_auditor [options]
 
-     Options:
+    Options:
+    ===========================================================================
 
 	Execution:
-	--debug   		: Enable debug mode
-	--conf			: Specify configuration file (yaml)
-	--help			: Show this
-	--version		: Show tools versions
-	--parser arg1[,arg2]	: Specify parsers be loaded
-	    'p0f'		: Process enumeration data
-	    'prads'		: Process enumeration data
-	    'argusFlow'		: Process NFA data (flow analysis)
-	    'snortAppId'	: Process enumeration data (App identification)
-	    'httpry'		: DPI over HTTP (URL's, UA, etc)
-	    'tcpdstat'		: Process enumeration data (protocol dist)
-	    'suricataEve'	: Process IDS data (alerts and payloads)
-	    'bro'		: DPI over different protocols
-	    'tcpflow'		: Process NFA data (session tracking)
-	--out_dataset		: Specify the kind of output data to generate
-	    'all'		: Generate all datasets
-	    'audit'		: Generate only audit dataset
-	--home_net		: Specify the 'homenet' in CIDR format
-	--payload		: Flag to enable payload decoding (IDS data)
+	--debug                 : Enable debug mode
+	--conf                  : Specify configuration file (yaml)
+	--help                  : Show this
+	--version               : Show tools versions
+	--parser arg1[,arg2]    : Specify parsers to be loaded
+	    'p0f'               : Process enumeration data
+	    'prads'             : Process enumeration data
+	    'argusFlow'         : Process NFA data (flow analysis)
+	    'snortAppId'        : Process enumeration data (App identification)
+	    'httpry'            : DPI over HTTP (URL's, UA, etc)
+	    'tcpdstat'          : Process enumeration data (protocol dist)
+	    'suricataEve'       : Process IDS data (alerts and payloads)
+	    'bro'               : DPI over different protocols
+	    'tcpflow'           : Process NFA data (session tracking)
+	--out_dataset           : Specify the kind of output data to generate
+	    'all'               : Generate all datasets
+	    'audit'             : Generate only audit dataset
+	--home_net              : Specify the 'homenet' in CIDR format
+	--payload               : Flag to enable payload decoding (IDS data)
 
 	Inputs:
-	--cap_file		: Set input capture file (pcap)
-	--audit_dict		: Path to vulnerability dictionary
-	--instance_dir		: Path to directory with 'initial raw dataset'
+	--cap_file              : Set input capture file (pcap)
+	--audit_dict            : Path to vulnerability dictionary
+	--instance_dir          : Path to directory with 'initial raw dataset'
 
 	Logging:
 	--log_dir  		: Path to log directory
 	--log_file 		: Path to output directory
 
+    
+    Examples
+    ===========================================================================
+
+    >> Perform a basic execution: All parsers/tools enabled
+        $ pnaf_auditor --cap_file test1.cap --log_dir /pnaf/www/test1
+
+    >> Perform analysis of existing "raw logs" from tools
+        Note: input directory must contains actual raw logs that are generated
+              by Tools (e.g. Snort unified2 files, Suricata JSON output, p0f
+              logs, etc
+        $ pnaf_auditor --instance_dir existinglogs --log_dir /pnaf/www/exlogs
+
+    >> Perform analysis of IDS tools only
+        $pnaf_auditor --cap_file test2.cap --log_dir /pnaf/www/test2 \
+            --parser bro,snort,suricataEve
+
+    >> Perform analysis with homenet: When a homenet is specified, audit is 
+       focused only on homenet IP addresses/networks and Flow data (stats) are
+       separated from External networks (useful to identify usage and filter
+       out devices)
+        $pnaf_auditor --cap_file test3.cap --log_dir /pnaf/www/test3 \
+            --homenet 192.168.1.0/14,192.168.2.30/27
+       
+    >> Perform analysis decoding payloads from unified2 file (Snort) stored
+       within a certain existing directory.
+        $pnaf_auditor --instance_dir mysnortfiles --payload
+
+    
+    WEB VISUALIZATION
+    ===========================================================================
+
+    A (very) basic Web visualization can be used within PNAF. 
+    To start HTTP daemon:
+
+        # /pnaf/bin/apachectl
+
+    Then place output directories within 
+        
+        /pnaf/www/ 
+
+    Output data that is generated on '--log_dir' generates a tree as follows:
+
+    DIRECTORY_NAME/                     (Raw logs genrated by tools)
+    |
+    |----- JSON/                        (Parsed files in JSON format)
+    |       |
+    |       |-------SUMMARY/            (JSON tree view of dataset and audits)
+    |       |       |                   (This is the main basic visualizer)
+    |       |       |
+    |       |       |---dataset         (Parsed data of all toolsets)
+    |       |       |---auditSummary    (Summary of audit information)
+    |       |       |---dataset.html    (All software found within trafic)
+    |       |       |---auditOutput     (Audit based on CVE (NIST) and software)
+    |       |       |---dataset.html    (Audit data sorted per single asset)
+    |       |
+    |       |-------VIEW1/          (Alternative JSON viewer)
+    |       |
+    |       |-------VIEWs/          (Deprecated)
+
+    Author
+    ===========================================================================
+    Javier Santillan [2014]
+        <jusafing@gmail.com>
+    
+    VERSION NOTES
+    ===========================================================================
+    Prototype version 0.1.2. 
+    Some parsers/functionalities from the original prototype are not included. 
+    ... YET. Next release will contain additional parsers/features
+
+    For further updates visit:
+        http://blog.honeynet.org.mx
+        http://sec.jusanet.org
+        http://www.honeynet.unam.mx
+    
+    ---------------------------------------------------------------------------
+    Morris off!
+    |
+    ,
 
 =head1 OPTIONS
 
