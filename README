@@ -10,8 +10,18 @@ prototype DOES NOT include any internal information about TU/e nor Fox-IT.
 
 From Version 0.1.2, PNAF is a project of UNAM-Chapter [The Honeynet Project]
         http://blog.honeynet.org.mx
+        http://pnaf.honeynet.org.mx
         http://sec.jusanet.org
         http://www.honeynet.unam.mx
+
+Version 0.1.2 will get just minor updates (bugs/parsing) and is the last 
+version of 0.1.x branch. You can either clone this repository and install it
+on your standalone machine, or download the Vistual Machine image available
+on http://pnaf.honeynet.org.mx/download/pnaf-0.1.2.ova
+
+Next version of PNAF is 0.2 is the current dev project. It will contain
+significant changes (containers, installation, parsing, daemon models).
+
 
 ###############################################################################
 1. SUMMARY
@@ -44,15 +54,11 @@ The framework is intended to achieve the following goals:
 
 PNAF is comprised by four main modules. Each module has its own engines which
 manage specific tools and process the data.
+PNAF is written in Perl, why?  because Perl rules!
 
 -----------------------------------------------
 PNAF Core
 -----------------------------------------------
-    > FECE	- Framework Environment Configuration Engine
-    > FAPI	- Framework Application Programming Interface
-    > FDCM	- Framework Daemon Control Manager
-    > FSA	- Framework Security Auditor 
-
 
 -----------------------------------------------
 1.  DCM - DATA COLLECTION MODULE
@@ -120,7 +126,7 @@ by yourself the following packages/libraries:
 APT packages:
 -------------
 
-    autoconf automake binutils-dev bison \                                                
+    autoconf automake binutils-dev bison \        
     build-essential byacc ccache cmake dsniff flex g++ gawk gcc \       
     libcap-ng-dev libcli-dev libdatetime-perl libdumbnet-dev \          
     libfixposix0 libfixposix-dev libgeoip-dev zlib1g zlib1g-dev \       
@@ -276,20 +282,20 @@ To install this module type the following:
         
         /pnaf/www/ 
 
-    Output data that is generated on '--log_dir' generates a tree as follows:
+    Output data stored in '--log_dir' contains a tree as follows:
 
     DIRECTORY_NAME/                     (Raw logs genrated by tools)
     |
     |----- JSON/                        (Parsed files in JSON format)
     |       |
-    |       |-------SUMMARY/            (JSON tree view of dataset and audits)
-    |       |       |                   (This is the main basic visualizer)
-    |       |       |
-    |       |       |---dataset         (Parsed data of all toolsets)
-    |       |       |---auditSummary    (Summary of audit information)
-    |       |       |---dataset.html    (All software found within trafic)
-    |       |       |---auditOutput     (Audit based on CVE (NIST) and software)
-    |       |       |---dataset.html    (Audit data sorted per single asset)
+    |       |---SUMMARY/            (JSON tree view of dataset and audits)
+    |       |   |                   (This is the main basic visualizer)
+    |       |   |
+    |       |   |---dataset         (Parsed data of all toolsets)
+    |       |   |---auditSummary    (Summary of audit information)
+    |       |   |---dataset.html    (All software found within trafic)
+    |       |   |---auditOutput     (Audit based on CVE (NIST) and software)
+    |       |   |---dataset.html    (Audit data sorted per single asset)
     |       |
     |       |-------VIEW1/          (Alternative JSON viewer)
     |       |
@@ -302,7 +308,23 @@ To install this module type the following:
 
 Copyright (C) 2014 by Javier Santillan
 
-This program is free software: you can redistribute it and/or modify
+** Disclaimer **
+
+This framework contains external tools that have their own licenses. For more
+information about licensing you can read the corresponding licence files that 
+are included within the tarballs that this framework uses for an automated 
+installation. Such packages have not been modified and any information about
+licenses/authors is as it can be found on the corresponding releases 
+(oficial websites, github, etc). For more information of versions used by this
+framework, you can check out the '--version' option of pnaf_auditor.
+
+PNAF does not claim any rights, modifications nor ownerships. The PNAF core 
+itself (Perl module included on this tarball within build/pnaf), is authored 
+by -Javier Santillan- and the licence cited below applies only to PNAF itself.
+
+** End disclaimer*
+
+PNAF core is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
@@ -316,10 +338,11 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Also add information on how to contact you by electronic and paper mail.
 
-PNAF v0.1  Copyright (C) 2014 Javier Santillan
-This program comes with ABSOLUTELY NO WARRANTY; for details type `show w'.
+PNAF v0.1.2  Copyright (C) 2014 Javier Santillan
+This program comes with ABSOLUTELY NO WARRANTY; for details type `--help' 
+option on pnaf_auditor.
 This is free software, and you are welcome to redistribute it
-under certain conditions; type `show c' for details.
+under certain conditions.
 
 ###############################################################################
 7. TODO
@@ -329,9 +352,11 @@ under certain conditions; type `show c' for details.
 - Add additional parsers (for all tools within the framework)
 - Frontend?
 - Bug fixes and compatibility issues (> Perl 5.14)
-    
-    VERSION NOTES
-    ===========================================================================
+        
+##############################################################################
+8. CONTACT
+##############################################################################
+
     Prototype version 0.1.2. 
     Some parsers/functionalities from the original prototype are not included. 
     ... YET. Next release will contain additional parsers/features
@@ -339,11 +364,16 @@ under certain conditions; type `show c' for details.
     For further updates visit:
         http://blog.honeynet.org.mx
         http://sec.jusanet.org
-        http://www.honeynet.unam.mx
-    
-##############################################################################
-8. CONTACT
-##############################################################################
 
-Javier Santillan <jusafing@gmail.com> 2014
+    Oficial websites
+        http://pnaf.honeynet.org.mx
+        http://pnaf.jusanet.org
+
+    Related posts/info/howtos
+        http://www.honeynet.unam.mx
+
+    Contact
+        Javier Santillan              <jusafing@gmail.com>
+        HoneynetProject UNAM-Chapter  <contact@honeynet.org.mx> 
+
 ,

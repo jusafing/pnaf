@@ -2627,41 +2627,41 @@ sub getSoftwareAuditIds
 		 $datahash->{$data}{'Software'}{'Terms'}{'alpha'}{'alphanum'}&&
 		 $datahash->{$data}{'Software'}{'Terms'}{'alpha'}{'number'} )
 	    {
-		foreach my $ver (keys$datahash->{$data}{'Software'}{
-				 'Terms'}{'alpha'}{'alphanum'})
+		foreach my $ver (keys%{$datahash->{$data}{'Software'}{
+				 'Terms'}{'alpha'}{'alphanum'}})
 		{
 		    next unless ( $ver =~ m/[\d+\.]\.+/ );
 		    $ver = lc($ver);
-		    foreach my $prod (keys$datahash->{$data}{'Software'}{
-				     'Terms'}{'alpha'}{'word'})
+		    foreach my $prod (keys%{$datahash->{$data}{'Software'}{
+				     'Terms'}{'alpha'}{'word'}})
 		    {
 			next unless ($prod =~ m/....*/);
 			$prod = lc($prod);
 			$datahash->{$data}{'AuditIDs'}{"$prod$ver"}++;
-			foreach my $asset (keys$datahash->{$data}{'Assets'})
+			foreach my $asset (keys%{$datahash->{$data}{'Assets'}})
 			{
 			    $sidhash->{"$prod$ver"}{$asset}++;
 			}
 		    }
 		}
-		foreach my $prod (keys$datahash->{$data}{'Software'}{
-				 'Terms'}{'alpha'}{'word'})
+		foreach my $prod (keys%{$datahash->{$data}{'Software'}{
+				 'Terms'}{'alpha'}{'word'}})
 		{
 		    next unless ($prod =~ m/....*/);
 		    $prod =~ s/server/_server/i;
 		    $prod = lc($prod);
-		    foreach my $ver (keys$datahash->{$data}{'Software'}{
-				     'Terms'}{'alpha'}{'number'})
+		    foreach my $ver (keys%{$datahash->{$data}{'Software'}{
+				     'Terms'}{'alpha'}{'number'}})
 		    {
 			next unless ($ver =~ m/...*/);
 			$ver = "_$ver";
-			foreach my $sub (keys$datahash->{$data}{'Software'}{
-					 'Terms'}{'alpha'}{'alphanum'})
+			foreach my $sub (keys%{$datahash->{$data}{'Software'}{
+					 'Terms'}{'alpha'}{'alphanum'}})
 			{
 			    $sub = "_$sub";
 			    $sub = lc($sub);
 			    $datahash->{$data}{'AuditIDs'}{"$prod$ver$sub"}++;
-			    foreach my $as (keys$datahash->{$data}{'Assets'})
+			    foreach my $as (keys%{$datahash->{$data}{'Assets'}})
 			    {
 				$sidhash->{"$prod$ver$sub"}{$as}++;
 			    }
@@ -2672,19 +2672,19 @@ sub getSoftwareAuditIds
 	    elsif ( $datahash->{$data}{'Software'}{'Terms'}{'alpha'}{'word'} &&
 		 $datahash->{$data}{'Software'}{'Terms'}{'alpha'}{'number'} )	
 	    {
-		foreach my $prod (keys$datahash->{$data}{'Software'}{
-				 'Terms'}{'alpha'}{'word'})
+		foreach my $prod (keys%{$datahash->{$data}{'Software'}{
+				 'Terms'}{'alpha'}{'word'}})
 		{
 		    next unless ($prod =~ m/....*/);
 		    $prod =~ s/server/_server/i;
 		    $prod = lc($prod);
-		    foreach my $ver (keys$datahash->{$data}{'Software'}{
-				     'Terms'}{'alpha'}{'number'})
+		    foreach my $ver (keys%{$datahash->{$data}{'Software'}{
+				     'Terms'}{'alpha'}{'number'}})
 		    {
 			next unless ($ver =~ m/...*/);
 			$ver = "_$ver";
 			$datahash->{$data}{'AuditIDs'}{"$prod$ver"}++;
-			foreach my $asset (keys$datahash->{$data}{'Assets'})
+			foreach my $asset (keys%{$datahash->{$data}{'Assets'}})
 			{
 			    $sidhash->{"$prod$ver"}{$asset}++;
 			}
@@ -2694,17 +2694,17 @@ sub getSoftwareAuditIds
 	    elsif ( $datahash->{$data}{'Software'}{'Terms'}{'alpha'}{'word'} &&
 		 $datahash->{$data}{'Software'}{'Terms'}{'alpha'}{'alphanum'} )	
 	    {
-		foreach my $ver (keys$datahash->{$data}{'Software'}{
-				 'Terms'}{'alpha'}{'alphanum'})
+		foreach my $ver (keys%{$datahash->{$data}{'Software'}{
+				 'Terms'}{'alpha'}{'alphanum'}})
 		{
 		    next unless ( $ver =~ m/....*/ );
 		    $ver = lc($ver);
-		    foreach my $prod (keys$datahash->{$data}{'Software'}{
-				     'Terms'}{'alpha'}{'word'})
+		    foreach my $prod (keys%{$datahash->{$data}{'Software'}{
+				     'Terms'}{'alpha'}{'word'}})
 		    {
 			$prod = lc($prod);
 			$datahash->{$data}{'AuditIDs'}{"$prod$ver"}++;
-			foreach my $asset (keys$datahash->{$data}{'Assets'})
+			foreach my $asset (keys%{$datahash->{$data}{'Assets'}})
 			{
 			    $sidhash->{"$prod$ver"}{$asset}++;
 			}
@@ -2717,12 +2717,12 @@ sub getSoftwareAuditIds
 		 $datahash->{$data}{'Software'}{'Terms'}{'alpha'}{'alphanum'}
 		 )	
 	    {
-		foreach my $prod (keys$datahash->{$data}{'Software'}{
-				 'Terms'}{'alpha'}{'alphanum'})
+		foreach my $prod (keys%{$datahash->{$data}{'Software'}{
+				 'Terms'}{'alpha'}{'alphanum'}})
 		{
 		    $prod = lc($prod);
 		    $datahash->{$data}{'AuditIDs'}{$prod}++;
-		    foreach my $asset (keys$datahash->{$data}{'Assets'})
+		    foreach my $asset (keys%{$datahash->{$data}{'Assets'}})
 		    {
 			$sidhash->{"$prod"}{$asset}++;
 		    }
@@ -2734,16 +2734,16 @@ sub getSoftwareAuditIds
 	    if ( $datahash->{$data}{'User Agents'}{'Browser Version'} &&
 		 $datahash->{$data}{'User Agents'}{'Browser'} )	
 	    {
-		foreach my $kb (keys$datahash->{
-				 $data}{'User Agents'}{'Browser'})
+		foreach my $kb (keys%{$datahash->{
+				 $data}{'User Agents'}{'Browser'}})
 		{
-		    foreach my $kbv (keys$datahash->{
-				     $data}{'User Agents'}{'Browser Version'})
+		    foreach my $kbv (keys%{${$datahash->{$data}{'User Agents'}{
+                                     'Browser Version'}}})
 		    {
 			$kb  = lc($kb);
 			$kbv = lc($kbv);
 			$datahash->{$data}{'AuditIDs'}{"$kb$kbv"}++;
-			foreach my $asset (keys$datahash->{$data}{'Assets'})
+			foreach my $asset (keys%{$datahash->{$data}{'Assets'}})
 			{
 			    $sidhash->{"$kb$kbv"}{$asset}++;
 			}
@@ -2753,16 +2753,16 @@ sub getSoftwareAuditIds
 	    if ( $datahash->{$data}{'User Agents'}{'Operating System'} &&
 		 $datahash->{$data}{'User Agents'}{'Operating System Version'})	
 	    {
-		foreach my $os (keys$datahash->{$data}{'User Agents'}{
-				'Operating System'})
+		foreach my $os (keys%{$datahash->{$data}{'User Agents'}{
+				'Operating System'}})
 		{
-		    foreach my $osv (keys$datahash->{$data}{'User Agents'}{
-				     'Operating System Version'})
+		    foreach my $osv (keys%{$datahash->{$data}{'User Agents'}{
+				     'Operating System Version'}})
 		    {
 			$os  = lc($os);
 			$osv = lc($osv);
 			$datahash->{$data}{'AuditIDs'}{"$os$osv"}++;
-			foreach my $asset (keys$datahash->{$data}{'Assets'})
+			foreach my $asset (keys%{$datahash->{$data}{'Assets'}})
 			{
 			    $sidhash->{"$os$osv"}{$asset}++;
 			}
@@ -3012,18 +3012,18 @@ sub auditSoftware
     $cnt{match_home}	= {};
     $cnt{asset_all}	= {};
     $cnt{asset_home}	= {};
-    foreach my $cve (keys$nvdhash->{CVEs})
+    foreach my $cve (keys%{$nvdhash->{CVEs}})
     {
 	$cnt{cve}{$cve}++;
-	foreach my $mprod (keys$nvdhash->{CVEs}{$cve}{'Vulnerable Software'})
+	foreach my $mprod (keys%{$nvdhash->{CVEs}{$cve}{'Vulnerable Software'}})
 	{
 	    $cnt{mprod}{$mprod}++;
-	    foreach my $prod (keys$nvdhash->{CVEs}{$cve}{
-			     'Vulnerable Software'}{$mprod})
+	    foreach my $prod (keys%{$nvdhash->{CVEs}{$cve}{
+			     'Vulnerable Software'}{$mprod}})
 	    {
 		$cnt{prod}{$prod}++;
-		foreach my $ver (keys$nvdhash->{CVEs}{$cve}{
-				 'Vulnerable Software'}{$mprod}{$prod})
+		foreach my $ver (keys%{$nvdhash->{CVEs}{$cve}{
+				 'Vulnerable Software'}{$mprod}{$prod}})
 		{
 		    $cnt{ver}{"$prod$ver"}++;
 		    next unless ( $ver =~ m/..*/ );
@@ -3032,7 +3032,7 @@ sub auditSoftware
 			$cnt{match_all}{"$prod$ver"}++;
 			if ( $CFG::options{home_net})
 			{
-			    foreach my $asset (keys$datahash->{"$prod$ver"})
+			    foreach my $asset (keys%{$datahash->{"$prod$ver"}})
 			    {
 				$cnt{asset_all}{$asset}++;
 				if ( $in_homenet->($asset) )
@@ -3052,7 +3052,7 @@ sub auditSoftware
 			}
 			else
 			{
-			    foreach my $asset (keys$datahash->{"$prod$ver"})
+			    foreach my $asset (keys%{$datahash->{"$prod$ver"}})
 			    {
 				$cnt{asset_all}{$asset}++;
 				$outhash->{$asset}{CVEs}{$cve}{Product} = 
@@ -3071,14 +3071,14 @@ sub auditSoftware
 	    
 	}	
     }
-    my $cve   = keys$cnt{cve};
-    my $mprod = keys$cnt{mprod};
-    my $prod  = keys$cnt{prod};
-    my $ver   = keys$cnt{ver};
-    my $ma    = keys$cnt{match_all};
-    my $mh    = keys$cnt{match_home};
-    my $aa    = keys$cnt{asset_all};
-    my $ah    = keys$cnt{asset_home};
+    my $cve   = keys%{$cnt{cve}};
+    my $mprod = keys%{$cnt{mprod}};
+    my $prod  = keys%{$cnt{prod}};
+    my $ver   = keys%{$cnt{ver}};
+    my $ma    = keys%{$cnt{match_all}};
+    my $mh    = keys%{$cnt{match_home}};
+    my $aa    = keys%{$cnt{asset_all}};
+    my $ah    = keys%{$cnt{asset_home}};
     logMsgT($self," |-- Loaded  ($cve) CVE entries in dictionary",
 	    2, $CFG::options{log_file});
     logMsgT($self," |-- Loaded  ($mprod) Main Products in dictionary",
@@ -3153,9 +3153,9 @@ sub auditBlackList
 		2, $CFG::options{log_file});
 	foreach my $track (keys%$datahash)
 	{
-	    foreach my $proto (keys$datahash->{$track})
+	    foreach my $proto (keys%{$datahash->{$track}})
 	    {
-		foreach my $sip (keys$datahash->{$track}{$proto})
+		foreach my $sip (keys%{$datahash->{$track}{$proto}})
 		{
 		    if ( $CFG::options{home_net} )
 		    {
@@ -3165,7 +3165,7 @@ sub auditBlackList
 			    if ( $in_homenet->($sip) )
 			    {
 				$cnt{asset_home}{$sip}++;
-				foreach my $ct (keys$bl{$sip}{categories})
+				foreach my $ct (keys%{$bl{$sip}{categories}})
 				{
 				    my $catname = $ct;
 				    if ($cat{$ct}{name})
@@ -3184,7 +3184,8 @@ sub auditBlackList
 				}			    
 			    }
 			}
-			foreach my $dip (keys$datahash->{$track}{$proto}{$sip})
+			foreach my $dip (keys%{$datahash->{$track}{
+                                        $proto}{$sip}})
 			{
 			    if ( $bl{$dip} )
 			    {
@@ -3192,7 +3193,8 @@ sub auditBlackList
 				if ( $in_homenet->($dip) )
 				{
 				    $cnt{asset_home}{$dip}++;
-				    foreach my $ct (keys$bl{$dip}{categories})
+				    foreach my $ct (keys%{$bl{$dip}{
+                                                    'categories'}})
 				    {
 					my $catname = $ct;
 					if ($cat{$ct}{name})
@@ -3231,7 +3233,7 @@ sub auditBlackList
 			if ( $bl{$sip} )
 			{
 			    $cnt{asset_all}{$sip}++;
-			    foreach my $ct (keys$bl{$sip}{categories})
+			    foreach my $ct (keys%{$bl{$sip}{categories}})
 			    {
 				my $catname = $ct;
 				if ($cat{$ct}{name})
@@ -3249,12 +3251,13 @@ sub auditBlackList
 				    $bl{$sip}{categories}{$ct};
 			    }			    
 			}
-			foreach my $dip (keys$datahash->{$track}{$proto}{$sip})
+			foreach my $dip (keys%{$datahash->{$track}{
+                                        $proto}{$sip}})
 			{
 			    if ( $bl{$dip} )
 			    {
 				$cnt{asset_all}{$dip}++;
-				foreach my $ct (keys$bl{$dip}{categories})
+				foreach my $ct (keys%{$bl{$dip}{categories}})
 				{
 				    my $catname = $ct;
 				    if ($cat{$ct}{name})
@@ -3308,14 +3311,14 @@ sub auditBlackList
 		if ( $bl{$domain} )
 		{
 		    $cnt{match_all}{$domain}++;
-		    foreach my $asset ( keys$datahash->{$domain} )
+		    foreach my $asset ( keys%{$datahash->{$domain}})
 		    {
 			$cnt{asset_all}{$asset}++;
 			if ( $in_homenet->($asset) )
 			{
 			    $cnt{match_home}{$domain}++;
 			    $cnt{asset_home}{$asset}++;
-			    foreach my $ct (keys$bl{$domain}{categories})
+			    foreach my $ct (keys%{$bl{$domain}{categories}})
 			    {
 				my $catname = $ct;
 				if ($cat{$ct}{name})
@@ -3344,10 +3347,10 @@ sub auditBlackList
 		if ( $bl{$domain} )
 		{
 		    $cnt{match_all}{$domain}++;
-		    foreach my $asset ( keys$datahash->{$domain} )
+		    foreach my $asset ( keys%{$datahash->{$domain}})
 		    {
 			$cnt{asset_all}{$asset}++;
-			foreach my $ct (keys$bl{$domain}{categories})
+			foreach my $ct (keys%{$bl{$domain}{categories}})
 			{
 			    my $catname = $ct;
 			    if ($cat{$ct}{name})
@@ -3372,11 +3375,11 @@ sub auditBlackList
     {
 	logMsgT($self,"Unknown blacklist ($bl) ", 0, $CFG::options{log_file});
     }
-    my $cat = keys$cnt{cat};
-    my $ma  = keys$cnt{match_all};
-    my $mh  = keys$cnt{match_home};
-    my $aa  = keys$cnt{asset_all};
-    my $ah  = keys$cnt{asset_home};
+    my $cat = keys%{$cnt{cat}};
+    my $ma  = keys%{$cnt{match_all}};
+    my $mh  = keys%{$cnt{match_home}};
+    my $aa  = keys%{$cnt{asset_all}};
+    my $ah  = keys%{$cnt{asset_home}};
 
     logMsgT($self," |-- Found ($cat) Blacklist Categories",
 	    2, $CFG::options{log_file});
