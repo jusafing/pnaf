@@ -2737,8 +2737,8 @@ sub getSoftwareAuditIds
 		foreach my $kb (keys%{$datahash->{
 				 $data}{'User Agents'}{'Browser'}})
 		{
-		    foreach my $kbv (keys%{${$datahash->{$data}{'User Agents'}{
-                                     'Browser Version'}}})
+		    foreach my $kbv (keys%{$datahash->{$data}{'User Agents'}{
+                                     'Browser Version'}})
 		    {
 			$kb  = lc($kb);
 			$kbv = lc($kbv);

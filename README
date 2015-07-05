@@ -1,5 +1,5 @@
 *******************************************************************************
-P A S S I V E    N E T W O R K    A U D I T    F R A M E W O R K    (PNAF) V0.1
+P A S S I V E    N E T W O R K    A U D I T    F R A M E W O R K  (PNAF) V0.1.2
 *******************************************************************************
 
 Copyright (C) 2014 Javier Santillan
@@ -14,15 +14,15 @@ From Version 0.1.2, PNAF is a project of UNAM-Chapter [The Honeynet Project]
         http://sec.jusanet.org
         http://www.honeynet.unam.mx
 
-Version 0.1.2 will get just minor updates (bugs/parsing) and is the last 
+Version 0.1.2 will get just minor updates (bugs/parsing) and it is the last 
 version of 0.1.x branch. You can either clone this repository and install it
-on your standalone machine, or download the Vistual Machine image available
-on http://pnaf.honeynet.org.mx/download/pnaf-0.1.2.ova
+on your standalone machine, or download the Virtual Machine image available
+on http://pnaf.honeynet.org.mx/download/pnaf-0.1.2.ova.tar.bz2
 
 The next version of PNAF is 0.2.x and it is the current main dev project. It 
-will contain significant changes (containers, installation, parsing, daemon
-model, etc). If you have any feedback/idea please drop an email (see contact
-information below).
+will contain significant changes (dockerized, improved installation, parsing, 
+daemon model, multi-threading support, etc). If you have any feedback/idea
+please drop an email (see contact information below).
 
 
 ###############################################################################
