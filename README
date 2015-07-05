@@ -19,8 +19,10 @@ version of 0.1.x branch. You can either clone this repository and install it
 on your standalone machine, or download the Vistual Machine image available
 on http://pnaf.honeynet.org.mx/download/pnaf-0.1.2.ova
 
-Next version of PNAF is 0.2 is the current dev project. It will contain
-significant changes (containers, installation, parsing, daemon models).
+The next version of PNAF is 0.2.x and it is the current main dev project. It 
+will contain significant changes (containers, installation, parsing, daemon
+model, etc). If you have any feedback/idea please drop an email (see contact
+information below).
 
 
 ###############################################################################
@@ -37,7 +39,7 @@ The framework is intended to achieve the following goals:
     a. To be a flexible, scalable and modular framework
     b. To provide accurate analysis of network plattforms
     c. To provide a useful API in order to develop further features and
-       improvements
+       improvements (not included on 0.1.2 prototype, but on next 0.2.x)
 
     Functional:
     a. Summary of the Security Level of the network
