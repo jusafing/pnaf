@@ -5,12 +5,12 @@
 ## By Javier Santillan [jusafing@gmail.com] (2014)                          ##
 ## -------------------------------------------------------------------------##
 ## Requirements:                                                            ##
-##	- Debian GNU/Linux 7.0.x                                                ##
-##	- Gentoo GNU/Linux stage3-x                                             ##
+##	- Debian GNU/Linux 7.0.x                                            ##
+##	- Gentoo GNU/Linux stage3-x                                         ##
 ## Summary :                                                                ##
-## 	Installation script of Passive Network Audit Framework v0.1             ##
-##	It compiles and installs a set of traffic analysis tools.               ##
-## 	See README file for more info.                                          ##
+## 	Installation script of Passive Network Audit Framework v0.1         ##
+##	It compiles and installs a set of traffic analysis tools.           ##
+## 	See README file for more info.                                      ##
 ##############################################################################
 
 ##############################################################################
@@ -26,7 +26,7 @@ PNAF_DIR="/pnaf"
 PNAF_SENSORNAME="Test"
 PNAF_USER="pnaf"
 DIALOG=${DIALOG=dialog}
-PNAF_INSTALLER="PNAF Installer v0.1"
+PNAF_INSTALLER="PNAF Installer v0.1.2"
 PNAF_EMERGE="/usr/bin/emerge"
 PNAF_APT="/usr/bin/aptitude"
 #------------------------------------------------------------------------#
@@ -112,7 +112,11 @@ execCmd()
     local fname="execCmd"
     cmd="$2"
     logMsg "$1 -> $FUNCNAME" " Executing: $2 ... "
-    eval $cmd &>> $INSTALLER_LOGFILE.exec
+    if [[ $cmd == *"aptitude"* ]]; then
+        eval $cmd 2>&1 
+    else
+        eval $cmd &>> $INSTALLER_LOGFILE.exec
+    fi
     if [ $? -ne 0 ]; then
         logMsg "$FUNCNAME" "ERROR: Execution of $1 [$2]"
         exitInstall
@@ -205,13 +209,13 @@ selectTools()
 	    "P0f"           "2-  Profiling and enumeration tool" on \
 	    "Tcpdstat"	    "3-  Protocol Distribution" on \
 	    "Suricata"	    "4-  Intrusion Detection system" on \
-	    "Snort"	        "5-  Intrusion Detection system" on \
-	    "Bro"	        "6-  Intrusion Detection Framework" on \
+	    "Snort"	    "5-  Intrusion Detection system" on \
+	    "Bro"	    "6-  Intrusion Detection Framework" on \
 	    "Barnyard"	    "7-  Unified2 data logger" off \
 	    "Cxtracker"	    "8-  Session Tracker" on \
-	    "Argus"	        "9-  Network flow analyzer" on \
-	    "Yaf"	        "10- Network Flow analyzer" off \
-	    "Silk" 	        "11- Network Flow Analyzer" off \
+	    "Argus"	    "9-  Network flow analyzer" on \
+	    "Yaf"	    "10- Network Flow analyzer" off \
+	    "Silk" 	    "11- Network Flow Analyzer" off \
 	    "Tcpflow"	    "12- Network Flow Analyzer" on \
 	    "Chaosreader"   "13- Application data analyzer" on \
 	    "Xplico" 	    "14- Application data analyzer" off \
