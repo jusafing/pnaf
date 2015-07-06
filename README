@@ -17,7 +17,7 @@ From Version 0.1.2, PNAF is a project of UNAM-Chapter [The Honeynet Project]
 Version 0.1.2 will get just minor updates (bugs/parsing) and it is the last 
 version of 0.1.x branch. You can either clone this repository and install it
 on your standalone machine, or download the Virtual Machine image available
-on http://pnaf.honeynet.org.mx/download/pnaf-0.1.2.ova.tar.bz2
+on http://pnaf.honeynet.org.mx/download/
 
 The next version of PNAF is 0.2.x and it is the current main dev project. It 
 will contain significant changes (dockerized, improved installation, parsing, 
