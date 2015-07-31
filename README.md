@@ -42,16 +42,19 @@ PNAF is written in Perl, why?  because Perl rules!
 #### DPM - DATA PROCESSING MODULE
 
 1. NPEE - Network Profiling and Enumeraton Engine
+
 * p0f	: Network and service enumeration 
 * prads	: Network and service enumeration
 
 2. IDSE - Network Intrusion Detection Engine
+
 * Suricata
 * Snort
 * Bro
 * Barnyard : Unified2 reader
 
 3. NFAE - Network Flow Analysis Engine
+
 * Cxtracker  : Basic flow data summary
 * Argus      : Flow data analysis
 * Yaf        : Flow data analysys
@@ -59,6 +62,7 @@ PNAF is written in Perl, why?  because Perl rules!
 * Tcpdstat   : Protocol statistics
 
 4. DPIE - Deep Packet Inspection Engine
+
 * Chaoreader : Application data extraction "any-snarf"
 * Nftracker  : File extraction
 * Xplico     : Application data extraction (url, files, ...)
@@ -71,6 +75,7 @@ PNAF is written in Perl, why?  because Perl rules!
 * Tcpdump    : Pcap filtering
 
 5. NSAE - Network Security Audit Engine
+
 * Pnaf-auditor
 
 
