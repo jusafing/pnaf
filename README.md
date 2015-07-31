@@ -21,6 +21,7 @@ PNAF is a framework intended to provide the capability of getting a security ass
 * To be a flexible, scalable and modular framework
 * To provide accurate analysis of network plattforms
 * To provide a useful API in order to develop further features and improvements (not included on 0.1.2 prototype, but on next 0.2.x)
+
 ##### Functional
 * Summary of the Security Level of the network
 * Findings of anomalous activities
@@ -39,20 +40,24 @@ PNAF is written in Perl, why?  because Perl rules!
 2. NCPE	- Network Traffic Pre-processing Engine
 
 #### DPM - DATA PROCESSING MODULE
+
 ##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NPEE	- Network Profiling and Enumeraton Engine
 * p0f	: Network and service enumeration 
 * prads	: Network and service enumeration
+
 ##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IDSE - Network Intrusion Detection Engine
 * Suricata
 * Snort
 * Bro
 * Barnyard : Unified2 reader
+
 ##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NFAE - Network Flow Analysis Engine
 * Cxtracker  : Basic flow data summary
 * Argus      : Flow data analysis
 * Yaf        : Flow data analysys
 * Silk       : Flow data analysys
 * Tcpdstat   : Protocol statistics
+
 ##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DPIE - Deep Packet Inspection Engine
 * Chaoreader : Application data extraction "any-snarf"
 * Nftracker  : File extraction
@@ -64,6 +69,7 @@ PNAF is written in Perl, why?  because Perl rules!
 * Dnscap     : DNS capture utility (tcpdump-like for DNS)
 * Tcpxtract  : File extraction
 * Tcpdump    : Pcap filtering
+
 ##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NSAE - Network Security Audit Engine
 * Pnaf-auditor
 
@@ -139,6 +145,7 @@ To install this module type the following:
 
     
 ### Examples
+
 ##### Perform a basic execution: All parsers/tools enabled
         $ pnaf_auditor --cap_file test1.cap --log_dir /pnaf/www/test1
 
@@ -211,6 +218,7 @@ option on pnaf_auditor. This is free software, and you are welcome to redistribu
 - Prototype version 0.1.2. Some parsers/functionalities from the original prototype are not included... YET. Next release will contain additional parsers/features
 
 ## CONTACT
+
 ###### For further updates visit:
 * http://blog.honeynet.org.mx
 * http://sec.jusanet.org
