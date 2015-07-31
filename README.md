@@ -1,4 +1,4 @@
-# PASSIVE NETWORK AUDIT FRAMEWORK (PNAF) v0.1.2
+# Passive Network Audit Framework (PNAF) v0.1.2
 -----
 
 Copyright (C) 2014 Javier Santillan
