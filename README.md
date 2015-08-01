@@ -6,18 +6,25 @@ Copyright (C) 2014 Javier Santillan
 PNAF v0.1.1 public prototype is an implementation of a TU/e master thesis developed as internship project at Fox-IT B.V in The Netherlands. This public prototype DOES NOT include any internal information about TU/e nor Fox-IT.
 
 From Version 0.1.2, PNAF is a project of UNAM-Chapter [The Honeynet Project]
-Main development site
+
+##### Main development site
+
 * https://dev.honeynet.org.mx/traffic-analysis/pnaf
 
-Updates, news and howtos
+##### Updates, news and howtos
+
 * http://blog.honeynet.org.mx
 * http://pnaf.honeynet.org.mx
-* http://sec.jusanet.org
 * http://www.honeynet.unam.mx
+* http://sec.jusanet.org
 
-Version 0.1.2 will get just minor updates (bugs/parsing) and it is the last version of 0.1.x branch. You can either clone this repository and install it on your standalone machine, or download the Virtual Machine image available on http://pnaf.honeynet.org.mx/download/
 
-The next version of PNAF is 0.2.x and it is the current main dev project. It will contain significant changes (dockerized, improved installation, parsing, daemon model, multi-threading support, etc). If you have any feedback/idea please drop an email (see contact information below).
+Version 0.1.2 will get just minor updates (bugs/parsing) and it is the last version of 0.1.x branch. You can either clone this repository and install it on your standalone machine, or download the pre-installed sources available on http://pnaf.honeynet.org.mx/download/
+
+* Virtual Machine image - (OVA file)
+* (Debian 8) Chroot directory with a pre-compiled and full installed PNAF - (tar.gz)
+
+The next version of PNAF is 0.2.x and it is the current main dev project. It will contain significant changes (dockerized?, improved installation, parsing, daemon model, multi-threading support, etc). If you have any feedback/idea please drop an email (see contact information below).
 
 ## SUMMARY
 PNAF is a framework intended to provide the capability of getting a security assessment of network plattforms by analysing in-depth the network traffic (in a passive way) and by providing a high-level interpretation in an automated way. It combines different analysis techniques and tools. The framework is intended to achieve the following goals:
@@ -95,6 +102,9 @@ Since the installer downloads some packages using either apt or emerge depending
     Config::Auto Pod::Usage  Proc::Daemon IO::CaptureOutput JSON:XS Cwd JSON::Parse Time::Piece Exception::Class Test::Warn Test::Differences Test::Deep Test::Most HTTP::BrowserDetect Getopt::Long String::Tokenizer URI::Encode Devel::Hexdump  Digest::MD5 Data::Dumper YAML NetPacket::Ethernet Net::Subnet
 
 ## INSTALLATION
+
+#### Installer
+
 You can install the whole framework (i.e. including the tools) by using the installer script. It has been tested on both Debian 7.x / Gentoo Stage 3 based systems (clean installation, base system, chrooted)
 
     ./install.sh
@@ -108,6 +118,22 @@ To install this module type the following:
     $ make
     $ make test
     # make install 	// (as root)
+
+#### Chroot
+
+To use the CHROOT way, just download the chroot directory, unpack it in your
+local file system and just execute the following:
+
+    # chroot chroot_pnaf
+
+    (This README file will be shown when you switch to that directory)
+
+NOTE: This way just works using Debian 8 amd64.
+
+#### Virtual Machine
+
+Import the OVA image using VirtualBox or Vmware. Login credentials are given in the welcome login screen. (You may need to change/add virtual network interfaces to meet local configuration requirements)
+
 
 ## USAGE
     $ pnaf_auditor [options]
