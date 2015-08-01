@@ -6,6 +6,10 @@ Copyright (C) 2014 Javier Santillan
 PNAF v0.1.1 public prototype is an implementation of a TU/e master thesis developed as internship project at Fox-IT B.V in The Netherlands. This public prototype DOES NOT include any internal information about TU/e nor Fox-IT.
 
 From Version 0.1.2, PNAF is a project of UNAM-Chapter [The Honeynet Project]
+Main development site
+* https://dev.honeynet.org.mx/traffic-analysis/pnaf
+
+Updates, news and howtos
 * http://blog.honeynet.org.mx
 * http://pnaf.honeynet.org.mx
 * http://sec.jusanet.org
