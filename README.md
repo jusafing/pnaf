@@ -5,7 +5,7 @@ Copyright (C) 2014 Javier Santillan
 
 PNAF v0.1.1 public prototype is an implementation of a TU/e master thesis developed as internship project at Fox-IT B.V in The Netherlands. This public prototype DOES NOT include any internal information about TU/e nor Fox-IT.
 
-From Version 0.1.2, PNAF is a project of UNAM-Chapter [The Honeynet Project]
+From Version 0.1.2, PNAF is a project of COSMIC-Chapter of [The Honeynet Project] (formerly from UNAM-Chapter)
 
 ##### Updates, news and howtos
 
