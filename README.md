@@ -7,24 +7,17 @@ PNAF v0.1.1 public prototype is an implementation of a TU/e master thesis develo
 
 From Version 0.1.2, PNAF is a project of UNAM-Chapter [The Honeynet Project]
 
-##### Main development site
-
-* https://dev.honeynet.org.mx/traffic-analysis/pnaf
-
 ##### Updates, news and howtos
 
-* http://blog.honeynet.org.mx
-* http://pnaf.honeynet.org.mx
-* http://www.honeynet.unam.mx
-* http://sec.jusanet.org
-
+* https://cosmic-labs.org/projects/pnaf/
+* https://cosmic-labs.org/pnaf-0-1-2-basic-howto/
 
 Version 0.1.2 will get just minor updates (bugs/parsing) and it is the last version of 0.1.x branch. You can either clone this repository and install it on your standalone machine, or download the pre-installed sources available on http://pnaf.honeynet.org.mx/download/
 
-* Virtual Machine image - (OVA file)
 * (Debian 8) Chroot directory with a pre-compiled and full installed PNAF - (tar.gz)
+* ~~Virtual Machine image - (OVA file)~~ (Not available anymore)
 
-The next version of PNAF is 0.2.x and it is the current main dev project. It will contain significant changes (dockerized?, improved installation, parsing, daemon model, multi-threading support, etc). If you have any feedback/idea please drop an email (see contact information below).
+The next version of PNAF is 0.2.x and it is the current main dev project. It will contain significant changes (docker image, improved installation, parsing, daemon model, multi-threading support, etc). If you have any feedback/idea please drop an email (see contact information below).
 
 ## SUMMARY
 PNAF is a framework intended to provide the capability of getting a security assessment of network plattforms by analysing in-depth the network traffic (in a passive way) and by providing a high-level interpretation in an automated way. It combines different analysis techniques and tools. The framework is intended to achieve the following goals:
@@ -246,18 +239,14 @@ option on pnaf_auditor. This is free software, and you are welcome to redistribu
 ## CONTACT
 
 ###### For further updates visit:
-* http://blog.honeynet.org.mx
-* http://sec.jusanet.org
-
-###### Oficial websites
-* http://pnaf.honeynet.org.mx
-* http://pnaf.jusanet.org
+* http://cosmic-labs.org
+* http://www.jusanet.org
 
 ###### Related posts/info/howtos
-* http://www.honeynet.unam.mx
+* http://www.honeynet.org.mx
 
 ###### Email
 * Javier Santillan              <jusafing@honeynet.org.mx>
-* HoneynetProject UNAM-Chapter  <contact@honeynet.org.mx> 
+* The Honeynet Project COSMIC-Chapter  <contact@cosmic-labs.org> 
 
 ,
